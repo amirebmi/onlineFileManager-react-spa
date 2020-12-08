@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 
 function TopLevel() {
 
-    const [entries, setEntries] = useState([{
-        id: 0,
-        name: "Init",
-        parentFolderId: null,
-        size: 0,
-        type: null,
-        folder: true
-    }]);
+    const [entries, setEntries] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:8080").then(res => setEntries(res.data));
     }, []);
+
+
 
     return (
         <>
@@ -29,9 +26,11 @@ function TopLevel() {
                         entries.map(entry =>
                         // Folder
                         {
-                            if (entry.folder == true) {
+                            if (entry.folder === true) {
                                 return <tr key={entry.id}>
+
                                     <td>\ <Link to={`/folders/${entry.id}`}>{entry.name}</Link></td>
+
                                     <td>Folder</td>
                                     <td></td>
                                 </tr>
@@ -47,11 +46,12 @@ function TopLevel() {
                     }
                 </tbody>
             </table>
+
         </>
     );
 
 
 }
 
-
+//<td>\ <Link to={`/folders/${entry.id}`}>{entry.name}</Link></td>
 export default TopLevel;

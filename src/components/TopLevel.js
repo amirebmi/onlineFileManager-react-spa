@@ -7,7 +7,11 @@ import axios from "axios";
 
 function TopLevel() {
 
+    let history = useHistory();
+
     const [entries, setEntries] = useState([]);
+
+
 
     useEffect(() => {
         axios.get("http://localhost:8080").then(res => setEntries(res.data));
@@ -46,6 +50,9 @@ function TopLevel() {
                     }
                 </tbody>
             </table>
+            <br />
+
+            <Link to={`/newfolder/${0}`}><button>Create Folder</button></Link>
 
         </>
     );
@@ -53,5 +60,4 @@ function TopLevel() {
 
 }
 
-//<td>\ <Link to={`/folders/${entry.id}`}>{entry.name}</Link></td>
 export default TopLevel;

@@ -8,14 +8,10 @@ function Folders() {
     let history = useHistory();
     let { id } = useParams();
 
-
     const [entries, setEntries] = useState([]);
     const [a, setA] = useState("");
 
     useEffect(async () => {
-        //await axios.get(`http://localhost:8080/folders/${id}`).then((res) => setEntries(res.data));
-        //await axios.get(`http://localhost:8080/folders/parentInfo/${id}`).then((res) => setA(res.data));
-
         let res = await axios.get(`http://localhost:8080/folders/${id}`);
         setEntries(res.data);
 
@@ -73,6 +69,8 @@ function Folders() {
                     
                 }}
                 >Back</button>
+
+                <Link to={`/newfolder/${id}`}><button>Create Folder</button></Link>
 
             </p>
 

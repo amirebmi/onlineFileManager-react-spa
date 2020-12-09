@@ -61,7 +61,7 @@ function Folders() {
 
                         <Button variant="secondary"
                             onClick={async () => {
-                                let pFolder = await axios.get(`http://localhost:8080/folders/parentInfo/${id}`)
+                                let pFolder = await axios.get(`http://localhost:8080/folders/parentId/${id}`)
 
                                 let parentId = pFolder.data.id;
                                 if (parentId === null) {
@@ -78,7 +78,7 @@ function Folders() {
                         <Button variant="danger"
                             onClick={async () => {
                                 // Get the parentFolder before delete its child folder
-                                let pFolder = await axios.get(`http://localhost:8080/folders/parentInfo/${id}`)
+                                let pFolder = await axios.get(`http://localhost:8080/folders/parentId/${id}`)
 
                                 // Delete the folder
                                 await axios.delete(`http://localhost:8080/folders/${id}`)

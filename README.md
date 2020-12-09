@@ -7,3 +7,12 @@
 # Tools
 - ReactJs 
 
+# Features (Version 1.0)
+
+- Create folder(s) at any level
+- Navigate through folders and sub-folder
+- *[1] Delete folder(s)
+- Download file(s) 
+
+
+###### Other features will be implemented in the next version.

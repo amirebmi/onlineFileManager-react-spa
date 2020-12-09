@@ -21,9 +21,9 @@ function TopLevel() {
 
     return (
         <>
-            <h2>Top Level Folders and Files</h2>
+            <h2>Index /</h2>
             <table border="1">
-                <thead><tr><th>Name</th><th>Size</th><th>Operation</th></tr></thead>
+                <thead><tr><th>Name</th><th>Type</th></tr></thead>
 
                 <tbody>
                     {
@@ -32,17 +32,14 @@ function TopLevel() {
                         {
                             if (entry.folder === true) {
                                 return <tr key={entry.id}>
-
                                     <td>\ <Link to={`/folders/${entry.id}`}>{entry.name}</Link></td>
-
                                     <td>Folder</td>
-                                    <td></td>
                                 </tr>
                                 // Files
                             } else {
                                 return <tr key={entry.id}>
                                     <td>{entry.name}</td>
-                                    <td>{entry.size} kb</td>
+                                    <td>File</td>
                                 </tr>;
                             }
                         }

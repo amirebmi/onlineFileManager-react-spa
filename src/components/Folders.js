@@ -24,9 +24,9 @@ function Folders() {
 
     return (
         <>
-            <h2>{a}</h2>
+            <h2>Index of /~{a}/</h2>
             <table border="1">
-                <thead><tr><th>Name</th><th>Size</th><th>Operation</th></tr></thead>
+                <thead><tr><th>Name</th><th>Type</th></tr></thead>
 
                 <tbody>
                     {
@@ -38,13 +38,12 @@ function Folders() {
                                 return <tr key={entry.id}>
                                     <td>\ <Link to={`/folders/${entry.id}`}>{entry.name}</Link></td>
                                     <td>Folder</td>
-                                    <td></td>
                                 </tr>
                                 // Files
                             } else {
                                 return <tr key={entry.id}>
                                     <td>{entry.name}</td>
-                                    <td>{entry.size} kb</td>
+                                    <td>File</td>
                                 </tr>;
                             }
                         }
@@ -57,21 +56,38 @@ function Folders() {
             <p>
 
                 <button
-                onClick = {async () => {
-                    let pFolder = await axios.get(`http://localhost:8080/folders/parentInfo/${id}`)
-                    
-                    let parentId = pFolder.data.id;
-                    if (parentId === null){
-                        history.push("/")
-                    } else{
-                        history.push(`/folders/${parentId}`)
-                    }
-                    
-                }}
+                    onClick={async () => {
+                        let pFolder = await axios.get(`http://localhost:8080/folders/parentInfo/${id}`)
+
+                        let parentId = pFolder.data.id;
+                        if (parentId === null) {
+                            history.push("/")
+                        } else {
+                            history.push(`/folders/${parentId}`)
+                        }
+
+                    }}
                 >Back</button>
 
                 <Link to={`/newfolder/${id}`}><button>Create Folder</button></Link>
 
+                <button
+                    onClick={async () => {
+                        // Get the parentFolder before delete its child folder
+                        let pFolder = await axios.get(`http://localhost:8080/folders/parentInfo/${id}`)
+
+                        // Delete the folder
+                        await axios.delete(`http://localhost:8080/folders/${id}`)
+
+                        // Navigation process
+                        let parentId = pFolder.data.id;
+                        if (parentId === null) {
+                            history.push("/")
+                        } else {
+                            history.push(`/folders/${parentId}`)
+                        }
+                    }}
+                > Delete</button>
             </p>
 
 
